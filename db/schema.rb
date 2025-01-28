@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_28_080941) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_28_093533) do
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -37,6 +37,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_28_080941) do
     t.decimal "tax_rate"
     t.decimal "tax_amount"
     t.decimal "total_amount"
+    t.decimal "company_tax"
     t.index ["order_id"], name: "index_invoices_on_order_id"
   end
 

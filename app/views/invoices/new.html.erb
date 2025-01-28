@@ -1,79 +1,50 @@
-<h1>請求書の作成</h1>
+<%= form_with model: @invoice, local: true do |f| %>
+  <div class="field">
+    <%= f.label :invoice_number %>
+    <%= f.text_field :invoice_number %>
+  </div>
 
-<% if @order.present? %>
-  <%= form_with(model: @invoice, url: order_invoice_path(@order), local: true) do |form| %>
-    <% if @invoice.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@invoice.errors.count, "エラー") %> が発生しました:</h2>
-        <ul>
-          <% @invoice.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+  <div class="field">
+    <%= f.label :company_name %>
+    <%= f.text_field :company_name %>
+  </div>
 
-    <div>
-      <%= form.label :invoice_number, "請求書番号" %>
-      <%= form.text_field :invoice_number %>
-    </div>
+  <div class="field">
+    <%= f.label :company_address %>
+    <%= f.text_field :company_address %>
+  </div>
 
-    <div>
-      <%= form.label :company_name, "会社名" %>
-      <%= form.text_field :company_name %>
-    </div>
+  <div class="field">
+    <%= f.label :company_tax_id %>
+    <%= f.text_field :company_tax_id %>
+  </div>
 
-    <div>
-      <%= form.label :company_address, "会社住所" %>
-      <%= form.text_area :company_address %>
-    </div>
+  <div class="field">
+    <%= f.label :customer_name %>
+    <%= f.text_field :customer_name %>
+  </div>
 
-    <div>
-      <%= form.label :company_tax_id, "会社税番号" %>
-      <%= form.text_field :company_tax_id %>
-    </div>
+  <div class="field">
+    <%= f.label :customer_address %>
+    <%= f.text_field :customer_address %>
+  </div>
 
-    <div>
-      <%= form.label :customer_name, "顧客名" %>
-      <%= form.text_field :customer_name %>
-    </div>
+  <div class="field">
+    <%= f.label :tax_rate %>
+    <%= f.number_field :tax_rate, step: 0.01 %>
+  </div>
 
-    <div>
-      <%= form.label :customer_address, "顧客住所" %>
-      <%= form.text_area :customer_address %>
-    </div>
+  <div class="field">
+    <%= f.label :total_amount %>
+    <%= f.number_field :total_amount, step: 0.01 %>
+  </div>
 
-    <div>
-      <%= form.label :tax_rate, "税率(%)" %>
-      <%= form.number_field :tax_rate, step: 0.01 %>
-    </div>
+  <div class="field">
+    <%= f.label :invoice_date %>
+    <%= f.date_field :invoice_date %>
+  </div>
 
-    <div>
-      <%= form.label :tax_amount, "税額" %>
-      <%= form.number_field :tax_amount, step: 0.01 %>
-    </div>
-
-    <div>
-      <%= form.label :total_amount, "請求総額" %>
-      <%= form.number_field :total_amount, step: 0.01 %>
-    </div>
-
-    <div>
-      <%= form.label :invoice_date, "請求日" %>
-      <%= form.date_field :invoice_date, value: Date.today %>
-    </div>
-
-    <div>
-      <%= form.label :status, "ステータス" %>
-      <%= form.select :status, [['未払い', '未払い'], ['支払い済み', '支払い済み']] %>
-    </div>
-
-    <div>
-      <%= form.submit "請求書を作成" %>
-    </div>
-  <% end %>
-<% else %>
-  <p>注文が見つかりませんでした。</p>
+  <div class="actions">
+    <%= f.submit "Create Invoice" %>
+  </div>
 <% end %>
-
-<%= link_to '戻る', orders_path, class: "btn btn-secondary" %>

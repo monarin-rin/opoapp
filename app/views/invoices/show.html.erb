@@ -27,7 +27,7 @@
         <td><%= item.quantity %></td>
         <td>¥<%= number_to_currency(item.product.price, unit: "") %></td>
         <td><%= item.product.tax_rate %>%</td>
-        <td>¥<%= number_to_currency(item.quantity * item.product.price * (item.product.tax_rate / 100.0), unit: "") %></td>
+        <td>¥<%= number_to_currency(item.tax_amount, unit: "") %></td>
         <td>¥<%= number_to_currency(item.quantity * item.product.price, unit: "") %></td>
       </tr>
     <% end %>
@@ -36,9 +36,3 @@
 
 <p><strong>合計（税込）:</strong> ¥<%= number_to_currency(@invoice.total_amount, unit: "") %></p>
 <p><strong>税率 10%:</strong> ¥<%= number_to_currency(@invoice.tax_amount, unit: "") %></p>
-<p><strong>税率 8%:</strong> ¥<%= number_to_currency(@invoice.tax_amount * 0.8, unit: "") %></p>
-
-<%= link_to 'PDFで請求書をダウンロード', invoice_path(@invoice, format: :pdf), class: "btn btn-primary" %>
-<%= link_to '編集', edit_invoice_path(@invoice), class: "btn btn-warning" %>
-<%= link_to '削除', invoice_path(@invoice), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-<%= link_to '戻る', invoices_path, class: "btn btn-secondary" %>

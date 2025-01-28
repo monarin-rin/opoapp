@@ -22,22 +22,24 @@ class InvoicesController < ApplicationController
 
   # 新規請求書フォーム
   def new
-    @order = Order.find(params[:order_id])
-    @invoice = @order.build_invoice
+    @order = Order.find(params[:order_id])  # 受注IDに基づいて注文を取得
+    @invoice = @order.build_invoice  # 受注に関連する新規請求書を作成
   end
 
   # 請求書の作成
+  # 請求書の作成
   def create
     @order = Order.find(params[:order_id])
-    @invoice = @order.build_invoice(invoice_params)
-    @invoice.tax_amount = calculate_tax(@invoice.total_amount, @invoice.tax_rate)
+    @invoice = @order.build_invoice(invoice_params)  # パラメータを使って請求書を作成
+    @invoice.tax_amount = calculate_tax(@invoice.total_amount, @invoice.tax_rate)  # 税額計算
 
     if @invoice.save
-      redirect_to @invoice, notice: "請求書が作成されました。"
+    redirect_to @invoice, notice: "請求書が作成されました。"
     else
-      render :new, status: :unprocessable_entity
+    render :new, status: :unprocessable_entity  # バリデーションエラーがあれば新規作成フォームを再表示
     end
   end
+
 
   # 編集画面
   def edit
