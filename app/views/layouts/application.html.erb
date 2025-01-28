@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Opoapp" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <header>
+      <% if user_signed_in? %>
+        <p>こんにちは、<%= current_user.name %> さん</p>
+        <%= link_to '受注一覧', orders_path %> |
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_confirm: "本当にログアウトしますか？" } %>
+      <% else %>
+        <%= link_to 'ログイン', new_user_session_path %> |
+        <%= link_to 'サインアップ', new_user_registration_path %>
+      <% end %>
+    </header>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </body>
+</html>

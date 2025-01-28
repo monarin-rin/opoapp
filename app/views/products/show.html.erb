@@ -1,0 +1,25 @@
+<h1>商品詳細</h1>
+
+<p>
+  <strong>商品名:</strong> <%= @product.name %>
+</p>
+
+<p>
+  <strong>価格:</strong> ¥<%= number_to_currency(@product.price, unit: "") %>
+</p>
+
+<p>
+  <strong>税率:</strong> <%= @product.tax_rate %>%
+</p>
+
+<p>
+  <strong>カテゴリ:</strong> <%= @product.category %>
+</p>
+
+<p>
+  <strong>説明:</strong> <%= @product.description %>
+</p>
+
+<%= link_to '編集', edit_product_path(@product), class: "btn btn-warning" %>
+<%= link_to '削除', product_path(@product), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+<%= link_to '商品一覧に戻る', products_path, class: "btn btn-secondary" %>

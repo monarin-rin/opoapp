@@ -1,0 +1,45 @@
+<h1>新規商品作成</h1>
+
+<%= form_with(model: @product, local: true) do |form| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "エラー") %>が発生しました:</h2>
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "商品名" %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :price, "価格" %><br>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.label :tax_rate, "税率 (%)" %><br>
+    <%= form.number_field :tax_rate, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.label :category, "カテゴリ" %><br>
+    <%= form.text_field :category %>
+  </div>
+
+  <div>
+    <%= form.label :description, "説明" %><br>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.submit "作成する", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to '戻る', products_path, class: "btn btn-secondary" %>

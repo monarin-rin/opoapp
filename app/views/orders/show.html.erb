@@ -1,0 +1,15 @@
+<h1><%= @order.name %> の詳細</h1>
+
+<p>説明: <%= @order.description %></p>
+<p>顧客: <%= @order.customer.name %></p>
+<p>注文日: <%= @order.order_date.strftime('%Y年%m月%d日') if @order.order_date %></p>
+<p>ステータス: <%= @order.status %></p>
+
+<% if @order.invoice.present? %>
+  <p>この注文には請求書が既に作成されています。</p>
+  <%= link_to '請求書を見る', invoice_path(@order.invoice), class: "btn btn-info" %>
+<% else %>
+  <%= link_to '請求書を作成する', new_order_invoice_path(@order), class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to '戻る', orders_path, class: "btn btn-secondary" %>

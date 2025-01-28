@@ -1,0 +1,44 @@
+<h1>適格請求書</h1>
+
+<p><strong>適格請求書発行事業者登録番号:</strong> <%= @invoice.company_tax_id %></p>
+<p><strong>請求書番号:</strong> <%= @invoice.invoice_number %></p>
+<p><strong>会社名:</strong> <%= @invoice.company_name %></p>
+<p><strong>会社住所:</strong> <%= @invoice.company_address %></p>
+<p><strong>顧客名:</strong> <%= @invoice.customer_name %></p>
+<p><strong>顧客住所:</strong> <%= @invoice.customer_address %></p>
+<p><strong>請求日:</strong> <%= @invoice.invoice_date.strftime('%Y年%m月%d日') if @invoice.invoice_date %></p>
+
+<h2>商品明細</h2>
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>数量</th>
+      <th>単価</th>
+      <th>税率</th>
+      <th>消費税額</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @invoice.order.order_items.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= item.quantity %></td>
+        <td>¥<%= number_to_currency(item.product.price, unit: "") %></td>
+        <td><%= item.product.tax_rate %>%</td>
+        <td>¥<%= number_to_currency(item.quantity * item.product.price * (item.product.tax_rate / 100.0), unit: "") %></td>
+        <td>¥<%= number_to_currency(item.quantity * item.product.price, unit: "") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><strong>合計（税込）:</strong> ¥<%= number_to_currency(@invoice.total_amount, unit: "") %></p>
+<p><strong>税率 10%:</strong> ¥<%= number_to_currency(@invoice.tax_amount, unit: "") %></p>
+<p><strong>税率 8%:</strong> ¥<%= number_to_currency(@invoice.tax_amount * 0.8, unit: "") %></p>
+
+<%= link_to 'PDFで請求書をダウンロード', invoice_path(@invoice, format: :pdf), class: "btn btn-primary" %>
+<%= link_to '編集', edit_invoice_path(@invoice), class: "btn btn-warning" %>
+<%= link_to '削除', invoice_path(@invoice), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+<%= link_to '戻る', invoices_path, class: "btn btn-secondary" %>

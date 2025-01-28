@@ -1,0 +1,6 @@
+{
+    "json.format.enable": true,
+    "workbench.settings.useSplitJSON": true,
+    "json.schemas": [],
+    "npm.packageManager": "npm"
+}

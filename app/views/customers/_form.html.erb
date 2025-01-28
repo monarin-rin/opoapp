@@ -1,0 +1,41 @@
+<%= form_with(model: customer, local: true) do |form| %>
+  <% if customer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(customer.errors.count, "エラー") %> が発生しました:</h2>
+      <ul>
+        <% customer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "顧客名" %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :email, "メールアドレス" %>
+    <%= form.email_field :email, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :phone_number, "電話番号" %>
+    <%= form.telephone_field :phone_number, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :address, "住所" %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :contact_person, "担当者名" %>
+    <%= form.text_field :contact_person %>
+  </div>
+
+  <div>
+    <%= form.submit "保存する", class: "btn btn-primary" %>
+  </div>
+<% end %>

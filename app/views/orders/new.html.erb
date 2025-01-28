@@ -1,0 +1,38 @@
+<h1>新しい受注を作成</h1>
+
+<%= form_with(model: @order, local: true) do |form| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> 件のエラーがあります:</h2>
+      <ul>
+        <% @order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "注文名" %>
+    <%= form.text_field :name %>
+  </div>
+  
+  <div>
+    <%= form.label :description, "説明" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :customer_id, "顧客" %>
+    <%= form.collection_select :customer_id, Customer.all, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.label :create_invoice, "請求書を作成する" %>
+    <%= form.check_box :create_invoice, {}, "1", "0" %>
+  </div>
+
+  <div>
+    <%= form.submit "受注を作成" %>
+  </div>
+<% end %>

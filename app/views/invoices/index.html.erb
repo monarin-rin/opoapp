@@ -1,0 +1,30 @@
+<h1>請求書一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>請求書番号</th>
+      <th>会社名</th>
+      <th>顧客名</th>
+      <th>合計金額</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= invoice.invoice_number %></td>
+        <td><%= invoice.company_name %></td>
+        <td><%= invoice.customer_name %></td>
+        <td><%= number_to_currency(invoice.total_amount, unit: "¥") %></td>
+        <td>
+          <%= link_to '詳細', invoice_path(invoice), class: "btn btn-info" %>
+          <%= link_to '編集', edit_invoice_path(invoice), class: "btn btn-warning" %>
+          <%= link_to '削除', invoice_path(invoice), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新しい請求書を作成', new_invoice_path, class: "btn btn-success" %>

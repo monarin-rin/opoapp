@@ -1,0 +1,81 @@
+<h1><%= @invoice.new_record? ? "新しい請求書を作成" : "請求書を編集" %></h1>
+
+<%= form_with(model: @invoice, local: true) do |f| %>
+  <% if @invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invoice.errors.count, "エラー") %> が発生しました:</h2>
+      <ul>
+        <% @invoice.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- 請求書の基本情報 -->
+  <fieldset>
+    <legend>請求書の基本情報</legend>
+    <div>
+      <%= f.label :invoice_number, "請求書番号" %>
+      <%= f.text_field :invoice_number %>
+    </div>
+
+    <div>
+      <%= f.label :invoice_date, "請求日" %>
+      <%= f.date_field :invoice_date, value: @invoice.invoice_date || Date.today %>
+    </div>
+  </fieldset>
+
+  <!-- 会社情報 -->
+  <fieldset>
+    <legend>会社情報</legend>
+    <div>
+      <%= f.label :company_name, "会社名" %>
+      <%= f.text_field :company_name %>
+    </div>
+
+    <div>
+      <%= f.label :company_address, "会社住所" %>
+      <%= f.text_field :company_address %>
+    </div>
+
+    <div>
+      <%= f.label :company_tax_id, "登録番号" %>
+      <%= f.text_field :company_tax_id %>
+    </div>
+  </fieldset>
+
+  <!-- 顧客情報 -->
+  <fieldset>
+    <legend>顧客情報</legend>
+    <div>
+      <%= f.label :customer_name, "顧客名" %>
+      <%= f.text_field :customer_name %>
+    </div>
+
+    <div>
+      <%= f.label :customer_address, "顧客住所" %>
+      <%= f.text_field :customer_address %>
+    </div>
+  </fieldset>
+
+  <!-- 金額情報 -->
+  <fieldset>
+    <legend>金額情報</legend>
+    <div>
+      <%= f.label :tax_rate, "消費税率 (%)" %>
+      <%= f.number_field :tax_rate, step: 0.01, value: @invoice.tax_rate || 10.0 %>
+    </div>
+
+    <div>
+      <%= f.label :total_amount, "合計金額 (税込)" %>
+      <%= f.number_field :total_amount, step: 0.01 %>
+    </div>
+  </fieldset>
+
+  <!-- アクションボタン -->
+  <div class="actions">
+    <%= f.submit "保存", class: "btn btn-primary" %>
+    <%= link_to "キャンセル", invoices_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

@@ -1,0 +1,30 @@
+<h1>受注一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>注文名</th>
+      <th>顧客</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.name %></td>
+        <td><%= order.customer.name %></td>
+        <td>
+          <%= link_to '詳細', order_path(order), class: "btn btn-info" %>
+          <%= link_to '編集', edit_order_path(order), class: "btn btn-warning" %>
+          <%= button_to "削除", order_path(order), method: :delete, 
+                data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+          <%= link_to '請求書を作成', new_order_invoice_path(order), class: "btn btn-primary" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新規作成', new_order_path, class: "btn btn-success" %>

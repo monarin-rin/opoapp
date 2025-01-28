@@ -1,0 +1,28 @@
+ja:
+  errors:
+    messages:
+      not_saved: "エラーが発生しました。入力内容を確認してください。"
+      blank: "を入力してください"
+      not_a_number: "は数値で入力してください"
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "名前を入力してください"
+            age:
+              not_a_number: "年齢は数値で入力してください"
+
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      new: "ログイン"
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      updated: "アカウント情報を更新しました。"
+      destroyed: "アカウントを削除しました。"
+    passwords:
+      send_instructions: "パスワードリセットの手順を送信しました。"

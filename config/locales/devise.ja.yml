@@ -1,0 +1,38 @@
+ja:
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "既にログアウトしています。"
+    passwords:
+      send_instructions: "パスワードリセットの手順をメールで送信しました。"
+      updated_not_active: "パスワードが変更されました。"
+    confirmations:
+      send_instructions: "確認の手順をメールで送信しました。"
+      confirmed: "メールアドレスが確認されました。"
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      updated: "アカウント情報が更新されました。"
+      destroyed: "アカウントが削除されました。"
+    failure:
+      already_authenticated: "既にログインしています。"
+      unauthenticated: "ログインまたは登録が必要です。"
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      locked: "アカウントがロックされています。"
+      last_attempt: "アカウントがロックされる前の最後の試行です。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      timeout: "セッションの有効期限が切れました。もう一度ログインしてください。"
+      unconfirmed: "メールアドレスの確認が必要です。"
+    mailer:
+      confirmation_instructions:
+        subject: "メールアドレス確認手順"
+      reset_password_instructions:
+        subject: "パスワードリセット手順"
+      unlock_instructions:
+        subject: "アカウントのロック解除"
+    shared:
+      links:
+        sign_in: "ログイン"
+        sign_out: "ログアウト"
+        sign_up: "新規登録"
+        forgot_password: "パスワードをお忘れですか？"

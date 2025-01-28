@@ -1,0 +1,30 @@
+<h1>商品一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>価格</th>
+      <th>税率</th>
+      <th>カテゴリ</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td>¥<%= number_to_currency(product.price, unit: "") %></td>
+        <td><%= product.tax_rate %>%</td>
+        <td><%= product.category %></td>
+        <td>
+          <%= link_to '詳細', product_path(product), class: "btn btn-info" %>
+          <%= link_to '編集', edit_product_path(product), class: "btn btn-warning" %>
+          <%= link_to '削除', product_path(product), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新規商品作成', new_product_path, class: "btn btn-success" %>
